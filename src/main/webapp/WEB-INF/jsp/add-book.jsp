@@ -11,11 +11,11 @@
 	<h1>Add Book</h1>
 	<form:form action = "add-book" modelAttribute="book">
 		<form:hidden path="id"/>
-		Book Name: <form:input path="name" /><br/>
-		Book ISBN: <form:input path="isbnNumber" /><br/>
-		Book Date: <form:input path="publishDate" type="date" /><br/>
-		Book Price: <form:input path="price" /><br/>
-		Book Type: <form:select path="type">
+		Book Name        : <form:input path="name" /><br/>
+		Book ISBN        : <form:input path="isbnNumber" /><br/>
+		Book Date        : <form:input path="publishDate" type="date" /><br/>
+		Book Price (ZAR) : <form:input path="price" /><br/>
+		Book Type        : <form:select path="type">
                 <form:option value="EBook" label="EBook"/>
                 <form:option value="SoftCover" label="SoftCover"/>
                 <form:option value="HardCover" label="HardCover"/>

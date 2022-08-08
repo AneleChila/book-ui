@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void save(Book book) {
 		if (book.getId() != null) {
+			book.setIsbnNumber(null);
 			RestClient.updateBook(book, book.getId());
 			return;
 		}
@@ -41,7 +44,7 @@ public class BookServiceImpl implements BookService {
 		book.setId(response.getId());
 		book.setIsbnNumber(response.getIsbnNumber());
 		book.setName(response.getName());
-		book.setPublishDate(response.getPublishDate().toString());
+		book.setPublishDate(new SimpleDateFormat("dd/MM/yyyy").format(response.getPublishDate()));
 		book.setType(response.getType());
 		book.setPrice(response.getPrice());
 		return book;
