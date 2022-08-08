@@ -11,16 +11,14 @@ import java.util.List;
 @Repository
 public class BookServiceImpl implements BookService {
 
-	private final List<Book> books = List.of(
-			new Book(1L, "A1", new BigInteger("1"), new Date().toString(), new BigDecimal("90.3"), "EBook"),
-			new Book(2L, "A2", new BigInteger("1"), new Date().toString(), new BigDecimal("90.3"), "EBook"),
-			new Book(3L, "A3", new BigInteger("1"), new Date().toString(), new BigDecimal("90.3"), "EBook"),
-			new Book(4L, "A4", new BigInteger("1"), new Date().toString(), new BigDecimal("90.3"), "EBook")
-	);
+	private List<Book> books = new ArrayList<>();
+	private Long id = 0L;
 	
 	@Override
 	public void save(Book book) {
+		book.setId(id);
 		books.add(book);
+		id++;
 	}
 
 	@Override

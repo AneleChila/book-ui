@@ -11,45 +11,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class BookController {
 
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping(value = {"/", "/home",})
-	public String getAllBook(Model model) {
-		model.addAttribute("res",bookService.get());
-		return  "books";
+	@RequestMapping(value = {"/", "/home",})
+	public ModelAndView getAllBook(Model model) {
+		ModelAndView mav = new ModelAndView("manage-book");
+		mav.addObject("books", bookService.get());
+		return mav;
 	}
-	
-	@RequestMapping(value = "/openAddBookForm")
+
+	@RequestMapping(value = "/open-add-book-form")
 	public ModelAndView openAddBookForm() {
-		ModelAndView mav = new ModelAndView("addbook");
+		ModelAndView mav = new ModelAndView("add-book");
 		mav.addObject("book", new Book());
 		return mav;
 	}
 	
-	@RequestMapping(value = "/bookprocess")
+	@RequestMapping(value = "/add-book")
 	public ModelAndView bookProcess(@ModelAttribute("book") Book book) {
-		ModelAndView mav = new ModelAndView("managebook");
+		ModelAndView mav = new ModelAndView("manage-book");
 		bookService.save(book);
 		mav.addObject("books", bookService.get());
 		return mav;
 	}
 	
-	@RequestMapping(value = "/getSingleBook")
-	public ModelAndView editBook(@RequestParam("bookid") int id) {
-		ModelAndView mav = new ModelAndView("addbook");
+	@RequestMapping(value = "/get-book")
+	public ModelAndView editBook(@RequestParam("id") int id) {
+		ModelAndView mav = new ModelAndView("add-book");
 		mav.addObject("book", bookService.get(id));
 		return mav;
 	}
 	
-	@RequestMapping(value = "/deleteprocess")
-	public ModelAndView deleteBook(@RequestParam("bookid") int id) {
-		ModelAndView mav = new ModelAndView("managebook");
+	@RequestMapping(value = "/delete-book")
+	public ModelAndView deleteBook(@RequestParam("id") int id) {
+		ModelAndView mav = new ModelAndView("manage-book");
 		bookService.delete(id);
-		mav.addObject("books", bookService.get());
+		List<Book> books = bookService.get();
+
+		if(books.size() > 0) {
+			mav.addObject("books", bookService.get());
+			return mav;
+		}
+
+		mav.addObject("book", List.of(new  Book()));
 		return mav;
 	}
 }

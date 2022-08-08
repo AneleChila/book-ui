@@ -12,16 +12,18 @@
 	<table border = "1">
 		<tr>
 			<th>Id</th>
-			<th>Title</th>
-			<th>Author</th>
-			<th>Actions</th>
+			<th>Name</th>
+			<th>ISBN</th>
+			<th>Date</th>
+			<th>Price</th>
+            <th>Type</th>
 		</tr>
 		<c:forEach items="${books}" var = "book">
-			<c:url var="editlink" value="getSingleBook">
-				<c:param name="bookid" value="${book.id}" />
+			<c:url var="editlink" value="get-book">
+				<c:param name="id" value="${book.id}" />
 			</c:url>
-			<c:url var="deletelink" value="deleteprocess">
-				<c:param name="bookid" value="${book.id}" />
+			<c:url var="deletelink" value="delete-book">
+				<c:param name="id" value="${book.id}" />
 			</c:url>
 			<tr>
 				<td>${book.id}</td>
@@ -37,14 +39,7 @@
 		</c:forEach>
 	</table>
 	<div>
-		<button onclick="window.location.href='openAddBookForm'">Add Book</button>
+		<button onclick="window.location.href='open-add-book-form'">Add Book</button>
 	</div>
 </body>
 </html>
-
-	private Long id;
-	private String name;
-	private BigInteger isbnNumber;
-	private Date publishDate;
-	private BigDecimal price;
-	private String type;

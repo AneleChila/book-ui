@@ -9,14 +9,18 @@
 </head>
 <body>
 	<h1>Add Book</h1>
-	<form:form action = "bookprocess" modelAttribute="book">
+	<form:form action = "add-book" modelAttribute="book">
 		<form:hidden path="id"/>
 		Book Name: <form:input path="name" /><br/>
 		Book ISBN: <form:input path="isbnNumber" /><br/>
-		Book Publish Date: <form:input path="publishDate" /><br/>
+		Book Date: <form:input path="publishDate" type="date" /><br/>
 		Book Price: <form:input path="price" /><br/>
-		Book Type: <form:input path="type" /><br/>
-
+		Book Type: <form:select path="type">
+                <form:option value="EBook" label="EBook"/>
+                <form:option value="SoftCover" label="SoftCover"/>
+                <form:option value="HardCover" label="HardCover"/>
+                </form:select>
+                <br><br>
 		<button type = "submit">Add Book</button>
 	</form:form>
 </body>
