@@ -42,14 +42,14 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/get-book")
-	public ModelAndView editBook(@RequestParam("id") int id) {
+	public ModelAndView editBook(@RequestParam("id") Long id) {
 		ModelAndView mav = new ModelAndView("add-book");
 		mav.addObject("book", bookService.get(id));
 		return mav;
 	}
 	
 	@RequestMapping(value = "/delete-book")
-	public ModelAndView deleteBook(@RequestParam("id") int id) {
+	public ModelAndView deleteBook(@RequestParam("id") Long id) {
 		ModelAndView mav = new ModelAndView("manage-book");
 		bookService.delete(id);
 		List<Book> books = bookService.get();
