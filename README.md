@@ -6,7 +6,7 @@ As a book collector I want the ability to create, and keep up to date, a catalog
 ## Requirements
 
 **1. Expose a Rest Api for the following actions:**
-- List with paging
+- List 
 - Add
 - Update
 - Delete
